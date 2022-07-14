@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"encoding/json"
+	"fmt"
 	"gin_jwt/utils"
 	"log"
 	"net/http"
@@ -30,8 +32,15 @@ func JwtController(ctx *gin.Context) {
 }
 
 func LoginController(ctx *gin.Context) {
-	username := ctx.Query("username")
-	password := ctx.Query("password")
+	parms, _ := ctx.GetRawData() // 定义map或结构体
+	var req map[string]interface{}
+	err := json.Unmarshal(parms, &req) // 反序列化
+	if err != nil {
+		fmt.Println("err: ", err)
+	}
+
+	username := req["username"]
+	password := req["password"]
 	if !(username == "admin" && password == "123456") {
 		ctx.JSON(http.StatusOK, gin.H{
 			"code": -1,
