@@ -3,6 +3,7 @@ package router
 import (
 	"gin_jwt/controller"
 	"gin_jwt/middelware"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,6 +20,26 @@ func Router(r *gin.Engine) {
 		jwt.Use(middelware.JWTAuth())
 		//获取列表数据
 		jwt.GET("/list", controller.UserListController)
+	}
+
+	// jwt
+	gorm := r.Group("/gorm")
+	{
+		//创建表
+		gorm.POST("/create", controller.CreateController)
+
+		//插入数据
+		gorm.POST("/insert", controller.InsertController)
+
+		//更新数据
+		gorm.POST("/update", controller.UpdateController)
+
+		//查询数据
+		gorm.POST("/select", controller.SelectController)
+
+		//删除数据
+		gorm.POST("/delete", controller.DeleteController)
+
 	}
 
 }
