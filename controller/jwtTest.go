@@ -3,9 +3,11 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"gin_jwt/model"
 	"gin_jwt/utils"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +26,14 @@ func JwtController(ctx *gin.Context) {
 		})
 		return
 	}
+	// 保存到redis
+	rdb := model.Rdb
+	rctx := model.RdbCtx
+	time1 := time.Now().Format("200601021504")
+	rdbKey := "user:" + time1
+	result, err := rdb.SAdd(rctx, rdbKey, token).Result()
+	fmt.Println(result, err)
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "成功",
