@@ -42,18 +42,28 @@ func Router(r *gin.Engine) {
 
 	}
 
-   // redis
+	// redis
 	redis := r.Group("/redis")
 	{
 		//设置值
 		redis.POST("/set", controller.RdbSetController)
 
-      //获取值
+		//获取值
 		redis.POST("/get", controller.RdbGetController)
 
-      //删除值
+		//删除值
 		redis.POST("/del", controller.RdbDelController)
 
+	}
+
+	// web
+	web := r.Group("/web")
+	{
+		//注册
+		web.POST("/register", controller.RegisterController)
+
+		//登录
+		web.POST("/login", controller.LoginWebController)
 
 	}
 
