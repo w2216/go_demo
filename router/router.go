@@ -67,4 +67,11 @@ func Router(r *gin.Engine) {
 
 	}
 
+	// chan
+	inCh := r.Group("/chan")
+	{
+		//流水线模型1
+		inCh.POST("/chan1", controller.ChanController)
+	}
+
 }
