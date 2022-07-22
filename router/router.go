@@ -72,6 +72,8 @@ func Router(r *gin.Engine) {
 	{
 		//流水线模型1
 		inCh.POST("/chan1", controller.ChanController)
+		//流水线模型2
+		inCh.POST("/chan2", controller.Chan2Controller)
 	}
 
 }
