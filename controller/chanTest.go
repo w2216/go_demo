@@ -20,7 +20,7 @@ func ChanController(ctx *gin.Context) {
 	for v := range outTwo {
 		result = append(result, v)
 	}
-	
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"code": 0,
 		"msg":  "",
@@ -33,7 +33,7 @@ func producer(num ...int) chan int {
 	out := make(chan int)
 	go func() {
 		defer close(out)
-		for v := range num {
+		for _, v := range num {
 			out <- v
 		}
 	}()
