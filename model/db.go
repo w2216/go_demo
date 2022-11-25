@@ -19,7 +19,7 @@ const (
 	USER_NAME = "root"
 	PASS_WORD = "a88888888"
 	HOST      = "sddphp.cn"
-	PORT      = "19006"
+	PORT      = "19906"
 	DATABASE  = "gorm"
 	CHARSET   = "utf8"
 )

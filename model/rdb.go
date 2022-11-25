@@ -12,7 +12,7 @@ var RdbCtx = context.Background()
 
 func init() {
 	Rdb = redis.NewClient(&redis.Options{
-		Addr:     "sddphp.cn:19379",
+		Addr:     "sddphp.cn:19979",
 		Password: "20210101", // no password set
 		DB:       0,          // use default DB
 	})
