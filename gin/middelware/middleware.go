@@ -2,7 +2,7 @@ package middelware
 
 import (
 	"errors"
-	"gin_jwt/utils"
+	"gin/utils"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -62,7 +62,7 @@ func JWTAuth() gin.HandlerFunc {
 	}
 }
 
-//检查用户名信息
+// 检查用户名信息
 func CheckUserInfo(claims *utils.CustomClaims) error {
 	username := claims.Username
 	password := claims.Password

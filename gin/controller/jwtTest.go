@@ -3,8 +3,8 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
-	"gin_jwt/model"
-	"gin_jwt/utils"
+	"gin/model"
+	"gin/utils"
 	"log"
 	"net/http"
 	"time"

@@ -17,8 +17,8 @@ func init() {
 		DB:       0,          // use default DB
 	})
 
-	err := Rdb.Ping(RdbCtx).Err()
-	if err != nil {
-		panic(err)
+	RdbErr = Rdb.Ping(RdbCtx).Err()
+	if RdbErr != nil {
+		panic(RdbErr)
 	}
 }

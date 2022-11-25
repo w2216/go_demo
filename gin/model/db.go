@@ -56,6 +56,6 @@ func init() {
 	SqlDB.SetConnMaxLifetime(time.Hour)
 
 	// ping
-	SqlDB.Ping()
+	_ = SqlDB.Ping()
 
 }

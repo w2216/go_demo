@@ -1,8 +1,8 @@
 package router
 
 import (
-	"gin_jwt/controller"
-	"gin_jwt/middelware"
+	"gin/controller"
+	"gin/middelware"
 
 	"github.com/gin-gonic/gin"
 )
