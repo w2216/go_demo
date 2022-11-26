@@ -2,7 +2,7 @@ package router
 
 import (
 	"gin/controller"
-	"gin/middelware"
+	"gin/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +17,7 @@ func Router(r *gin.Engine) {
 		// 获取token
 		jwt.GET("/index", controller.JwtController)
 		//使用中间件
-		jwt.Use(middelware.JWTAuth())
+		jwt.Use(middleware.JWTAuth())
 		//获取列表数据
 		jwt.GET("/list", controller.UserListController)
 	}
