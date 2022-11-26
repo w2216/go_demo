@@ -6,7 +6,6 @@ import (
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
-	"io"
 	"os"
 	"path"
 	"time"
@@ -27,10 +26,6 @@ func LoggerToFile() gin.HandlerFunc {
 	if err != nil {
 		fmt.Println("err", err)
 	}
-	// 日志文件不需要颜色
-	gin.DisableConsoleColor()
-	// 禁用控制台输出
-	gin.DefaultWriter = io.MultiWriter(src)
 
 	// 实例化
 	logger := logrus.New()
