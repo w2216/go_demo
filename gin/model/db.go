@@ -3,6 +3,9 @@ package model
 import (
 	"database/sql"
 	"fmt"
+	"gin/middleware"
+	"github.com/sirupsen/logrus"
+	"gorm.io/gorm/logger"
 	"time"
 
 	"gorm.io/driver/mysql"
@@ -26,6 +29,17 @@ const (
 
 // 初始化链接
 func init() {
+	slowLogger := logger.New(
+		//设置Logger
+		NewMyWriter(),
+		logger.Config{
+			//慢SQL阈值
+			// SlowThreshold: time.Millisecond,
+			//设置日志级别，只有Warn以上才会打印sql
+			LogLevel: logger.Info,
+		},
+	)
+
 	dbDSN := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=Local", USER_NAME, PASS_WORD, HOST, PORT, DATABASE, CHARSET)
 	// 打开连接失败
 	Db, DbErr = gorm.Open(mysql.New(mysql.Config{
@@ -35,7 +49,9 @@ func init() {
 		// DontSupportRenameIndex:    true,  // 重命名索引时采用删除并新建的方式，MySQL 5.7 之前的数据库和 MariaDB 不支持重命名索引
 		// DontSupportRenameColumn:   true,  // 用 `change` 重命名列，MySQL 8 之前的数据库和 MariaDB 不支持重命名列
 		// SkipInitializeWithVersion: false, // 根据当前 MySQL 版本自动配置
-	}), &gorm.Config{})
+	}), &gorm.Config{
+		Logger: slowLogger,
+	})
 	if DbErr != nil {
 		panic("数据库链接失败1: " + DbErr.Error())
 	}
@@ -58,4 +74,28 @@ func init() {
 	// ping
 	_ = SqlDB.Ping()
 
+}
+
+// 定义自己的Writer
+type MyWriter struct {
+	mlog *logrus.Logger
+}
+
+// 实现gorm/logger.Writer接口
+func (m *MyWriter) Printf(format string, v ...interface{}) {
+	logstr := fmt.Sprintf(format, v...)
+	//利用loggus记录日志
+	m.mlog.Info(logstr)
+}
+
+func NewMyWriter() *MyWriter {
+	log := logrus.New()
+	//配置logrus
+	log.SetFormatter(&logrus.JSONFormatter{
+		TimestampFormat: "2006-01-02 15:04:05",
+	})
+	src, _ := middleware.LogSrc()
+	log.Out = src
+
+	return &MyWriter{mlog: log}
 }

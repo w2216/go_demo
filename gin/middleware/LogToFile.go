@@ -11,9 +11,7 @@ import (
 	"time"
 )
 
-// LoggerToFile 日志记录到文件
-func LoggerToFile() gin.HandlerFunc {
-
+func LogSrc() (src *os.File, FileName string) {
 	pwd, _ := os.Getwd()
 	logFilePath := fmt.Sprintf("%s/%s/", pwd, "logs")
 	logFileName := "gin.log"
@@ -22,13 +20,16 @@ func LoggerToFile() gin.HandlerFunc {
 	fileName := path.Join(logFilePath, logFileName)
 
 	// 写入文件
-	src, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
-	if err != nil {
-		fmt.Println("err", err)
-	}
+	src, _ = os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	return
+}
+
+// LoggerToFile 日志记录到文件
+func LoggerToFile() gin.HandlerFunc {
 
 	// 实例化
 	logger := logrus.New()
+	src, fileName := LogSrc()
 
 	// 设置输出
 	logger.Out = src
@@ -37,7 +38,7 @@ func LoggerToFile() gin.HandlerFunc {
 	logger.SetLevel(logrus.DebugLevel)
 
 	// 设置 rotatelogs
-	logWriter, err := rotatelogs.New(
+	logWriter, _ := rotatelogs.New(
 		// 分割后的文件名称
 		fileName+".%Y%m%d.log",
 
