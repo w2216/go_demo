@@ -1,0 +1,17 @@
+type (
+	IdReq {
+		Id int64 `json:"id"`
+	}
+
+	UserInfoReply {
+		Id     int64  `json:"id"`
+		Name   string `json:"name"`
+		Number string `json:"number"`
+		Gender string `json:"gender"`
+	}
+)
+
+service user-api {
+	@handler ping
+	post /user/ping (IdReq) returns (UserInfoReply)
+}
