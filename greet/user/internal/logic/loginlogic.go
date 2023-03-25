@@ -2,7 +2,8 @@ package logic
 
 import (
 	"context"
-
+	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 	"user/internal/svc"
 	"user/internal/types"
 
@@ -26,11 +27,16 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginReply, err error) {
 	// todo: add your logic here and delete this line
 
-	logx.Info(req.Username)
-	logx.Info(req.Password)
+	user, err := l.svcCtx.UserModel.FindOneByName(l.ctx, req.Name)
+	if err != nil {
+		return nil, errors.Wrapf(errors.New(""), "HomestayOrderModel delete err : %+v", err)
+	}
+	logx.Info(user)
 
-	resp = &types.LoginReply{}
-	resp.Id = 1
+	err = copier.Copy(resp, user)
+	if err != nil {
+		return nil, err
+	}
 
 	return
 }
