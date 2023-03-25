@@ -3,7 +3,6 @@ module user
 go 1.19
 
 require (
-	github.com/jinzhu/copier v0.3.5
 	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.5.0
 )

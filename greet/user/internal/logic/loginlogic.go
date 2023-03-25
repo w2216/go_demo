@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"github.com/jinzhu/copier"
 	"github.com/pkg/errors"
 	"user/internal/svc"
 	"user/internal/types"
@@ -33,10 +32,10 @@ func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginReply, err err
 	}
 	logx.Info(user)
 
-	err = copier.Copy(resp, user)
-	if err != nil {
-		return nil, err
-	}
-
-	return
+	return &types.LoginReply{
+		Id:       user.Id,
+		Name:     user.Name,
+		Phone:    user.Phone,
+		Password: user.Password,
+	}, nil
 }
