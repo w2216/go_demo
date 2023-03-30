@@ -1,18 +1,29 @@
 type (
-	LoginReq {
-		Name     string `json:"name"`
-		Password string `json:"password"`
-	}
-
-	LoginReply {
+	UserReq {
 		Id       int64  `json:"id"`
 		Name     string `json:"name"`
 		Phone    string `json:"phone"`
 		Password string `json:"password"`
 	}
+
+	UserResp {
+		Id       int64  `json:"id"`
+		Name     string `json:"name"`
+		Phone    string `json:"phone"`
+		Password string `json:"password"`
+	}
+	UserResps {
+		List []UserResp `json:"list"`
+	}
 )
 
 service user-api {
-	@handler login
-	post /user/login (LoginReq) returns (LoginReply)
+	@handler add
+	post /user/add (UserReq) returns (UserReq)
+	@handler edit
+	post /user/edit (UserReq) returns (UserResp)
+	@handler del
+	post /user/del (UserReq) returns (UserResp)
+	@handler list
+	post /user/list (UserReq) returns (UserResps)
 }

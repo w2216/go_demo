@@ -9,16 +9,16 @@ import (
 	"user/internal/types"
 )
 
-func loginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func addHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.LoginReq
+		var req types.UserReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := logic.NewLoginLogic(r.Context(), svcCtx)
-		resp, err := l.Login(&req)
+		l := logic.NewAddLogic(r.Context(), svcCtx)
+		resp, err := l.Add(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {
