@@ -86,7 +86,9 @@ func Router(r *gin.Engine) {
 		ali.POST("/create", alipay.CreateController)
 		// 下单
 		ali.POST("/pay", alipay.PayController)
-		//下单2
+		// 退款
+		ali.POST("/refund", alipay.RefundController)
+		// 回调通知
 		ali.POST("/notify", alipay.NotifyController)
 	}
 

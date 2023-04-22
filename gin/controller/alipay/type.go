@@ -8,3 +8,8 @@ type CreateReq struct {
 type PayReq struct {
 	OutTradeNo string `json:"out_trade_no"`
 }
+
+type RefundReq struct {
+	OutTradeNo   string `json:"out_trade_no"`
+	RefundAmount string `json:"refund_amount"`
+}

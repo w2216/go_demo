@@ -41,11 +41,10 @@ func aliInit() *alipay.Client {
 
 	// 自动同步验签（只支持证书模式）
 	// 传入 alipayCertPublicKey_RSA2.crt 内容
-	client.AutoVerifySign([]byte("-----BEGIN CERTIFICATE-----\nMIIDqDCCApCgAwIBAgIQICMEIaN9vCw+NXQ8qeHh+zANBgkqhkiG9w0BAQsFADCBkTELMAkGA1UE\nBhMCQ04xGzAZBgNVBAoMEkFudCBGaW5hbmNpYWwgdGVzdDElMCMGA1UECwwcQ2VydGlmaWNhdGlv\nbiBBdXRob3JpdHkgdGVzdDE+MDwGA1UEAww1QW50IEZpbmFuY2lhbCBDZXJ0aWZpY2F0aW9uIEF1\ndGhvcml0eSBDbGFzcyAyIFIxIHRlc3QwHhcNMjMwNDIxMTE1NTA5WhcNMjQwNDIwMTE1NTA5WjB6\nMQswCQYDVQQGEwJDTjEVMBMGA1UECgwM5rKZ566x546v5aKDMQ8wDQYDVQQLDAZBbGlwYXkxQzBB\nBgNVBAMMOuaUr+S7mOWunSjkuK3lm70p572R57uc5oqA5pyv5pyJ6ZmQ5YWs5Y+4LTIwODgxMDIx\nNzk5NzI4NDQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCxC+q6/Xs0JW75SUMNwxz/\n6VqYG3hekfd8mmkRLtGfsdfZ0XehNf9yhBsICurefUGVo7JaYRI9h+JeYq4GTzQylczR6g+zdtsI\nCR43Uu/8Vm0MnWl6hNDXxN8P8Jde6NxyZJFgMgY25mKAl204koX7NfD5kiPRCP4N7KuTwD0nKNdV\nog/1QivSlv34Io81nfmq1Pomchc1o56umIqDIPC2TK0gauB5tNOBCKo9XhXFmMfkyZf1q8qS541a\nuODBvFNSSpQe/A+doal8RducipmWl+SeKKv+LabL4bIZQN+62YgBbRHwLMf3SvM97ztQMHZEXdNz\nZIB0XvHGE1sN9zh3AgMBAAGjEjAQMA4GA1UdDwEB/wQEAwIE8DANBgkqhkiG9w0BAQsFAAOCAQEA\nkyrZOqncVAEj97MPq3Mg132u8qrWCGm9wXAbRxE/ICmDwEGsaaMYja0HhCMfSx0ZKahEdQb0uDaA\n7mR2HzQLv0kVxNvsogCFuWHB8nGZiks1KHE4s5KUltOQClE/IeMC7xzk3R3ckw3D6FwOSXyHR9Zv\nyU595Nq4bb+3oBVSSscLymUovUm6d4ltZiyg2civW4wpb1zzwwj5De4xJXA7MUDchUPWfLHx5cjz\nFao18C286lfoh1S5O0JVO1L09benETmXMZcWu9TKt+KPI9hSdPWogTHiEGGqpXDUPO9C+nF+VM9P\nMtpoHsDLaR5b16IUqLneOd2C0iFk6cZWDXiHDA==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDszCCApugAwIBAgIQIBkIGbgVxq210KxLJ+YA/TANBgkqhkiG9w0BAQsFADCBhDELMAkGA1UE\nBhMCQ04xFjAUBgNVBAoMDUFudCBGaW5hbmNpYWwxJTAjBgNVBAsMHENlcnRpZmljYXRpb24gQXV0\naG9yaXR5IHRlc3QxNjA0BgNVBAMMLUFudCBGaW5hbmNpYWwgQ2VydGlmaWNhdGlvbiBBdXRob3Jp\ndHkgUjEgdGVzdDAeFw0xOTA4MTkxMTE2MDBaFw0yNDA4MDExMTE2MDBaMIGRMQswCQYDVQQGEwJD\nTjEbMBkGA1UECgwSQW50IEZpbmFuY2lhbCB0ZXN0MSUwIwYDVQQLDBxDZXJ0aWZpY2F0aW9uIEF1\ndGhvcml0eSB0ZXN0MT4wPAYDVQQDDDVBbnQgRmluYW5jaWFsIENlcnRpZmljYXRpb24gQXV0aG9y\naXR5IENsYXNzIDIgUjEgdGVzdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMh4FKYO\nZyRQHD6eFbPKZeSAnrfjfU7xmS9Yoozuu+iuqZlb6Z0SPLUqqTZAFZejOcmr07ln/pwZxluqplxC\n5+B48End4nclDMlT5HPrDr3W0frs6Xsa2ZNcyil/iKNB5MbGll8LRAxntsKvZZj6vUTMb705gYgm\nVUMILwi/ZxKTQqBtkT/kQQ5y6nOZsj7XI5rYdz6qqOROrpvS/d7iypdHOMIM9Iz9DlL1mrCykbBi\nt25y+gTeXmuisHUwqaRpwtCGK4BayCqxRGbNipe6W73EK9lBrrzNtTr9NaysesT/v+l25JHCL9tG\nwpNr1oWFzk4IHVOg0ORiQ6SUgxZUTYcCAwEAAaMSMBAwDgYDVR0PAQH/BAQDAgTwMA0GCSqGSIb3\nDQEBCwUAA4IBAQBWThEoIaQoBX2YeRY/I8gu6TYnFXtyuCljANnXnM38ft+ikhE5mMNgKmJYLHvT\nyWWWgwHoSAWEuml7EGbE/2AK2h3k0MdfiWLzdmpPCRG/RJHk6UB1pMHPilI+c0MVu16OPpKbg5Vf\nLTv7dsAB40AzKsvyYw88/Ezi1osTXo6QQwda7uefvudirtb8FcQM9R66cJxl3kt1FXbpYwheIm/p\nj1mq64swCoIYu4NrsUYtn6CV542DTQMI5QdXkn+PzUUly8F6kDp+KpMNd0avfWNL5+O++z+F5Szy\n1CPta1D7EQ/eYmMP+mOQ35oifWIoFCpN6qQVBS/Hob1J/UUyg7BW\n-----END CERTIFICATE-----\n"))
-
+	client.AutoVerifySign([]byte(config.AliPayPublicCertPath))
 	// 公钥证书模式，需要传入证书，以下两种方式二选一
 	// 证书路径
-	err = client.SetCertSnByPath("static/appPublicCert.crt", "static/alipayRootCert.crt", "static/alipayPublicCert.crt")
+	err = client.SetCertSnByPath(config.AppCertPath, config.AliPayRootCertPath, config.AliPayPublicCertPath)
 	// 证书内容
 	// err := client.SetCertSnByContent("appCertPublicKey bytes", "alipayRootCert bytes", "alipayCertPublicKey_RSA2 bytes")
 	if err != nil {
@@ -162,20 +161,6 @@ func PayController(ctx *gin.Context) {
 	//_, _ = ctx.Writer.Write(f)
 	//return
 
-	////统一收单交易退款接口
-	//bz := make(gopay.BodyMap)
-	//bz.Set("out_trade_no", Orders.OutTradeNo)
-	//bz.Set("refund_amount", "50.00")
-	//bz.Set("out_request_no", util.RandomString(32)) // 部分退款必填，默认全额退， 和out_trade_no一致
-	//aliRsp := new(alipay.TradeRefundResponse)
-	//aliRsp, err := client.TradeRefund(ctx, bz)
-	//if err != nil {
-	//	xlog.Error(err)
-	//	return
-	//}
-	//xlog.Info(aliRsp)
-	//return
-
 	// 统一收单交易退款查询
 	//bz := make(gopay.BodyMap)
 	//bz.Set("out_trade_no", Orders.OutTradeNo)
@@ -218,6 +203,42 @@ func PayController(ctx *gin.Context) {
 
 }
 
+// 退款
+func RefundController(ctx *gin.Context) {
+	var req RefundReq
+	// 在这种情况下，将自动选择合适的绑定
+	_ = ctx.ShouldBind(&req)
+	if req.OutTradeNo == "" {
+		xlog.Error(req)
+		ctx.JSON(http.StatusOK, "不能为空")
+		return
+	}
+
+	var Orders model.Orders
+	db := model.Db
+	db.Where("out_trade_no = ?", req.OutTradeNo).First(&Orders)
+	// 退款金额
+	if req.RefundAmount == "" || req.RefundAmount > Orders.TotalAmount {
+		req.RefundAmount = Orders.TotalAmount
+	}
+	client := aliInit()
+	////统一收单交易退款接口
+	bz := make(gopay.BodyMap)
+	bz.Set("out_trade_no", Orders.OutTradeNo)
+	bz.Set("refund_amount", req.RefundAmount)
+	bz.Set("out_request_no", util.RandomString(32)) // 部分退款必填，默认全额退， 和out_trade_no一致
+	aliRsp := new(alipay.TradeRefundResponse)
+	aliRsp, err := client.TradeRefund(ctx, bz)
+	if err != nil {
+		xlog.Error(err)
+		return
+	}
+	xlog.Info(aliRsp)
+	ctx.String(http.StatusOK, aliRsp.Response.Msg)
+	return
+}
+
+// 回调通知
 func NotifyController(ctx *gin.Context) {
 	req := ctx.Request
 	if err := req.ParseForm(); err != nil {
@@ -260,7 +281,7 @@ func NotifyController(ctx *gin.Context) {
 	xlog.Info(bm)
 
 	// 异步验签
-	ok, err := alipay.VerifySignWithCert("static/alipayPublicCert.crt", bm)
+	ok, err := alipay.VerifySignWithCert(config.AliPayPublicCertPath, bm)
 	if !ok {
 		xlog.Error(err)
 		ctx.String(200, "success")
