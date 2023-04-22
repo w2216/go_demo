@@ -2,12 +2,15 @@ package router
 
 import (
 	"gin/controller"
+	"gin/controller/alipay"
 	"gin/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func Router(r *gin.Engine) {
+
+	r.GET("", controller.IndexController)
 
 	// jwt
 	jwt := r.Group("/jwt")
@@ -74,6 +77,17 @@ func Router(r *gin.Engine) {
 		inCh.POST("/chan1", controller.ChanController)
 		//流水线模型2
 		inCh.POST("/chan2", controller.Chan2Controller)
+	}
+
+	// ali
+	ali := r.Group("/alipay")
+	{
+		// 创建订单
+		ali.POST("/create", alipay.CreateController)
+		// 下单
+		ali.POST("/pay", alipay.PayController)
+		//下单2
+		ali.POST("/notify", alipay.NotifyController)
 	}
 
 }
